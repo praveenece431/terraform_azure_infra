@@ -39,3 +39,28 @@ variable "address_space" {
 variable "subnet_prefix" {
   type = list(string)
 }
+
+variable "storage_account_name" {
+  type        = string
+  description = "Specifies the name of the storage account. Must be unique across all of Azure."
+}
+
+variable "account_tier" {
+  type        = string
+  description = "Defines the Tier to use for this storage account (e.g., Standard, Premium)."
+}
+
+variable "account_replication_type" {
+  type        = string
+  description = "Defines the type of replication to use for this storage account (e.g., LRS, GRS, ZRS, etc.)."
+}
+
+variable "app_name" {
+  type        = string
+  description = "Defines the tag name to use for this storage account."
+}
+
+variable "environment" {
+  type        = string
+  description = "Defines the env name to use for this storage account."
+}

@@ -1,10 +1,10 @@
 resource "azurerm_virtual_machine" "vm" {
   count                = length(var.vm_names)
-  name                  =  "${var.vm_names[count.index]}-OsDisk"
+  name                  =  "${var.vm_names[count.index]}"
   location              = var.location
   resource_group_name   = var.resource_group
   network_interface_ids = [azurerm_network_interface.nic[count.index].id]
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = var.vm_size
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   delete_os_disk_on_termination = true
