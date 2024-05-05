@@ -33,8 +33,8 @@ node_count          = "1"
 min_node_count      = "2"
 max_node_count      = "4"
 kubernetes_version  = "1.28.5"
-client_id           = "6fbfda2a-02d5-4ede-a0cd-6bc9524f2782"
-client_secret       = "NdI8Q~3rmmDZ0p3OCAjg4_Sz6B-TraCZ~Vt2scVn"
+client_id           = "********"
+client_secret       = "*******"
 
 # PostgreSQL 
 postgresql_server_name = "dev-bandla-db"
