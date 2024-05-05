@@ -64,3 +64,64 @@ variable "environment" {
   type        = string
   description = "Defines the env name to use for this storage account."
 }
+
+variable "container_name" {
+  type        = string
+  description = "Defines the name of the container"
+}
+
+variable "fileshare_name" {
+  type        = string
+  description = "Defines the name of the fileshare"
+}
+### ACR
+variable "acr_name" {
+  type = string
+}
+
+#AKS
+variable "cluster_name" {
+  description = "The name of the AKS cluster."
+  type        = string
+}
+
+variable "node_count" {
+  description = "The initial number of nodes for the AKS cluster."
+  default     = 2
+  type        = number
+}
+
+variable "kubernetes_version" {
+  description = "The version of Kubernetes to use for the AKS cluster."
+  type        = string
+}
+
+variable "client_id" {
+  description = "The client_id for AKS cluster creation."
+  type        = string
+}
+
+variable "client_secret" {
+  description = "The client_secret for AKS cluster creation."
+  type        = string
+}
+
+variable "min_node_count" {
+  description = "Size of the Azure VM"
+  type        = string
+}
+
+variable "pool_name" {
+  description = "Name of the pool"
+  type        = string
+}
+
+variable "max_node_count" {
+  description = "Size of the Azure VM"
+  type        = string
+}
+
+variable "enable_auto_scaling" {
+  description = "Size of the Azure VM"
+  type        = bool
+}

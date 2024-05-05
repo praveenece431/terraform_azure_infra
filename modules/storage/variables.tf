@@ -22,3 +22,13 @@ variable "account_replication_type" {
   type        = string
   description = "Defines the type of replication to use for this storage account (e.g., LRS, GRS, ZRS, etc.)."
 }
+
+variable "container_name" {
+  type = string
+  description = "Defines the name of the container"
+}
+
+variable "fileshare_name" {
+  type = string
+  description = "Defines the name of the fileshare"
+}

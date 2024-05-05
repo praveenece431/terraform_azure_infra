@@ -30,4 +30,30 @@ module "storage" {
   location                 = var.location
   account_tier             = var.account_tier
   account_replication_type = var.account_replication_type
+  fileshare_name           = var.fileshare_name
+  container_name           = var.container_name
+}
+
+module "acr" {
+  source         = "./modules/acr"
+  acr_name       = var.acr_name
+  resource_group = data.azurerm_resource_group.resource_group.name
+  location       = var.location
+}
+
+module "aks" {
+  source              = "./modules/aks"
+  cluster_name        = var.cluster_name
+  resource_group      = data.azurerm_resource_group.resource_group.name
+  location            = var.location
+  node_count          = var.node_count
+  pool_name           = var.pool_name
+  enable_auto_scaling = var.enable_auto_scaling
+  vm_size             = var.vm_size
+  min_node_count      = var.min_node_count
+  max_node_count      = var.max_node_count
+  kubernetes_version  = var.kubernetes_version
+  depends_on = [
+    module.acr
+  ]
 }
