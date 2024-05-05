@@ -35,3 +35,14 @@ max_node_count      = "4"
 kubernetes_version  = "1.28.5"
 client_id           = "6fbfda2a-02d5-4ede-a0cd-6bc9524f2782"
 client_secret       = "NdI8Q~3rmmDZ0p3OCAjg4_Sz6B-TraCZ~Vt2scVn"
+
+# PostgreSQL 
+postgresql_server_name = "dev-bandla-db"
+postgresql_version     = "10"
+admin_username         = "dev_user"
+admin_password         = "sggmrgr#mc@_4ApP$32G"
+sku_name               = "GP_Gen5_2"
+storage_mb             = "5120"
+backup_retention_days  = "7"
+auto_grow_enabled      = true
+database_name          = "dev_app_db"

@@ -57,3 +57,20 @@ module "aks" {
     module.acr
   ]
 }
+
+module "postgresql" {
+  source                 = "./modules/postgresql"
+  postgresql_server_name = var.postgresql_server_name
+  resource_group         = data.azurerm_resource_group.resource_group.name
+  location               = var.location
+  postgresql_version     = var.postgresql_version
+  admin_username         = var.admin_username
+  admin_password         = var.admin_password
+  sku_name               = var.sku_name
+  storage_mb             = var.storage_mb
+  backup_retention_days  = var.backup_retention_days
+  auto_grow_enabled      = var.auto_grow_enabled
+  depends_on = [
+    module.aks
+  ]
+}
