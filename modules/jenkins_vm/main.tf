@@ -1,5 +1,38 @@
 # modules/jenkins_vm/main.tf
 
+resource "azurerm_virtual_network" "example" {
+  name                = "${var.vm_name}-vnet"
+  address_space        = ["10.0.0.0/16"]
+  location            = var.location
+  resource_group_name = var.resource_group_name
+}
+
+resource "azurerm_subnet" "example" {
+  name                 = "default"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+resource "azurerm_network_interface" "example" {
+  name                = "${var.vm_name}-nic"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.example.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_public_ip" "example" {
+  name                = "${var.vm_name}-pip"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Static"
+}
+
 resource "azurerm_virtual_machine" "example" {
   name                  = var.vm_name
   location              = var.location

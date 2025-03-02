@@ -24,3 +24,7 @@ module "jenkins_master" {
 output "master_ip" {
   value = module.jenkins_master.vm_ip
 }
+
+output "slave_ip" {
+  value = module.jenkins_slave.vm_ip
+}
