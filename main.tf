@@ -97,9 +97,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-DAILY-LTS"
-    version   = "18.04.202306070"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
+    version   = "20.04.202209050"
   }
 
   provision_vm_agent = true
@@ -113,13 +113,16 @@ resource "null_resource" "provision_jenkins" {
   provisioner "remote-exec" {
   inline = [
     "set -e",  # Stop on the first error
-    "echo 'Updating package list...'",
-    "sudo apt update && sudo apt upgrade -y",
+    "sudo apt update",
     "sudo apt install openjdk-11-jdk -y",
-    "wget -q -O - https://pkg.jenkins.io/ci.org.key | sudo apt-key add -",
-    "sudo sh -c 'echo deb http://pkg.jenkins.io/debian/ stable main > /etc/apt/sources.list.d/jenkins.list'",
-    "sudo apt update && sudo apt install jenkins -y",
-    "sudo systemctl start  && sudo systemctl enable jenkins",
+    "wget https://get.jenkins.io/war-stable/latest/jenkins.war",
+    "wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.100/bin/apache-tomcat-9.0.100.tar.gz",
+    "tar -xvf apache-tomcat-9.0.87.tar.gz",
+    "mv apache-tomcat-9.0.100 tomcat",
+    "echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> ~/.bashrc",
+    "source ~/.bashrc",
+    "sudo mv jenkins.war tomcat/webapps/",
+    "sudo ./tomcat/bin/startup.sh",
     "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
   ]
 
