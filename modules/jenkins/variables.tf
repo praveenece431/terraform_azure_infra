@@ -12,3 +12,13 @@ variable "ssh_public_key" {
   description = "Public SSH key for configuring SSH access"
   type        = string
 }
+
+variable "master_ip" {
+  description = "Public IP address of the Jenkins master VM"
+  type        = string
+}
+
+variable "slave_ip" {
+  description = "Public IP address of the Jenkins slave VM"
+  type        = string
+}
