@@ -31,7 +31,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  count               = 2
+  count               = 1
   name                = "nic-${count.index}"
   resource_group_name = var.resource_group_name
   location           = var.location
@@ -45,7 +45,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_public_ip" "public_ip" {
-  count               = 2
+  count               = 1
   name                = "public-ip-${count.index}"
   resource_group_name = var.resource_group_name
   location           = var.location
