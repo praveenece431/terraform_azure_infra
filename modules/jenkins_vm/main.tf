@@ -36,16 +36,27 @@ resource "azurerm_virtual_machine" "example" {
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.example.id]
-  size                  = var.vm_size
-  admin_username        = var.username
-  admin_password        = var.password
-  image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "20.04-LTS"
-    version   = "latest"
+  vm_size               = var.vm_size         # vm_size instead of size
+  admin_username        = var.username         # admin_username instead of username
+  admin_password        = var.password         # admin_password instead of password
+
+  # Add the storage_os_disk block
+  storage_os_disk {
+    name                 = "${var.vm_name}-osdisk"
+    caching              = "ReadWrite"
+    create_option        = "FromImage"
+    managed              = true
+
+    # Image reference inside storage_os_disk
+    image_reference {
+      publisher = "Canonical"
+      offer     = "UbuntuServer"
+      sku       = "20.04-LTS"
+      version   = "latest"
+    }
   }
 
+  # Provisioning the machine
   provisioner "remote-exec" {
     inline = var.is_master ? [
       "sudo apt-get update",
