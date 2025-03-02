@@ -1,36 +1,36 @@
-resource "azurerm_virtual_network" "myJenkins" {
+resource "azurerm_virtual_network" "example" {
   name                = "${var.vm_name}-vnet"
   address_space        = ["10.0.0.0/16"]
   location            = var.location
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_subnet" "myJenkins" {
+resource "azurerm_subnet" "example" {
   name                 = "default"
   resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.myJenkins.name
+  virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-resource "azurerm_network_interface" "myJenkins" {
+resource "azurerm_network_interface" "example" {
   name                = "${var.vm_name}-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = azurerm_subnet.myJenkins.id
+  subnet_id           = azurerm_subnet.example.id
 }
 
-resource "azurerm_public_ip" "myJenkins" {
+resource "azurerm_public_ip" "example" {
   name                = "${var.vm_name}-pip"
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
 }
 
-resource "azurerm_virtual_machine" "myJenkins" {
+resource "azurerm_virtual_machine" "example" {
   name                  = var.vm_name
   location              = var.location
   resource_group_name   = var.resource_group_name
-  network_interface_ids = [azurerm_network_interface.myJenkins.id]
+  network_interface_ids = [azurerm_network_interface.example.id]
   size                  = var.vm_size
   admin_username        = var.username
   admin_password        = var.password
@@ -56,7 +56,7 @@ resource "azurerm_virtual_machine" "myJenkins" {
 
     connection {
       type        = "ssh"
-      host        = azurerm_public_ip.myJenkins.ip_address
+      host        = azurerm_public_ip.example.ip_address
       user        = var.username
       private_key = file("~/.ssh/id_rsa")
     }
@@ -68,5 +68,5 @@ resource "azurerm_virtual_machine" "myJenkins" {
 }
 
 output "vm_ip" {
-  value = azurerm_public_ip.myJenkins.ip_address
+  value = azurerm_public_ip.example.ip_address
 }
