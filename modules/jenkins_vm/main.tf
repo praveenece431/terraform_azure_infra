@@ -16,7 +16,13 @@ resource "azurerm_network_interface" "example" {
   name                = "${var.vm_name}-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = azurerm_subnet.example.id
+
+  # Add IP Configuration Block
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.example.id
+    private_ip_address_allocation = "Dynamic"
+  }
 }
 
 resource "azurerm_public_ip" "example" {
