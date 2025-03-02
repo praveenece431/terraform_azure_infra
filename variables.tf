@@ -42,3 +42,8 @@ variable "secret" {
   type        = string
   sensitive   = true
 }
+
+variable "ssh_public_key_path" {
+  description = "The path to the SSH public key for VM login."
+  type        = string
+}

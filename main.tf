@@ -17,6 +17,7 @@ module "jenkins_master" {
   master_ip           = azurerm_public_ip.jenkins_master.ip_address  # Reference the public IP here
   secret              = var.secret
   password            = var.password
+  ssh_public_key_path = var.ssh_public_key_path
 }
 
 
