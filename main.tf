@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 module "jenkins_master" {
   source              = "./modules/jenkins_vm"
   vm_name             = "jenkins-master"
