@@ -117,7 +117,7 @@ resource "null_resource" "provision_jenkins" {
     "sudo apt install openjdk-11-jdk -y",
     "wget https://get.jenkins.io/war-stable/latest/jenkins.war",
     "wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.100/bin/apache-tomcat-9.0.100.tar.gz",
-    "tar -xvf apache-tomcat-9.0.87.tar.gz",
+    "tar -xvf apache-tomcat-9.0.100.tar.gz",
     "mv apache-tomcat-9.0.100 tomcat",
     "echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> ~/.bashrc",
     "source ~/.bashrc",
