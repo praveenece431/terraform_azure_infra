@@ -36,27 +36,30 @@ resource "azurerm_virtual_machine" "example" {
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.example.id]
-  vm_size               = var.vm_size         # vm_size instead of size
-  admin_username        = var.username         # admin_username instead of username
-  admin_password        = var.password         # admin_password instead of password
+  vm_size               = var.vm_size
 
-  # Add the storage_os_disk block
+  # Use SSH Key-based access (no password)
+  admin_username        = var.username   # Keep the username for SSH login
+  admin_ssh_key {
+    username   = var.username
+    public_key = file(var.ssh_public_key_path)   # Provide the path to your public key
+  }
+
+  # OS Disk Configuration
   storage_os_disk {
     name                 = "${var.vm_name}-osdisk"
     caching              = "ReadWrite"
     create_option        = "FromImage"
-    managed              = true
 
-    # Image reference inside storage_os_disk
-    source_image_reference {
+    image_reference {
       publisher = "Canonical"
       offer     = "UbuntuServer"
-      sku       = "18.04-DAILY-LTS"
-      version   = "18.04.202306070"
-  }
+      sku       = "20.04-LTS"
+      version   = "latest"
+    }
   }
 
-  # Provisioning the machine
+  # Provisioning the machine with remote exec
   provisioner "remote-exec" {
     inline = var.is_master ? [
       "sudo apt-get update",
@@ -81,8 +84,4 @@ resource "azurerm_virtual_machine" "example" {
   tags = {
     environment = "development"
   }
-}
-
-output "vm_ip" {
-  value = azurerm_public_ip.example.ip_address
 }
