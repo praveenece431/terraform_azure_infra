@@ -17,7 +17,6 @@ resource "azurerm_network_interface" "example" {
   location            = var.location
   resource_group_name = var.resource_group_name
 
-  # Add IP Configuration Block
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.example.id
