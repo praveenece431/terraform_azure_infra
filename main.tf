@@ -1,17 +1,6 @@
 module "jenkins_master" {
   source              = "./modules/jenkins_vm"
   vm_name             = "jenkins-master"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  vm_size             = var.vm_size
-  username            = var.username
-  password            = var.password
-  is_master           = true
-}
-
-module "jenkins_master" {
-  source              = "./modules/jenkins_vm"
-  vm_name             = "jenkins-master"
   location           = var.location
   resource_group_name = var.resource_group_name
   vm_size             = var.vm_size
