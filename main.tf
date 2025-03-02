@@ -7,10 +7,10 @@ module "jenkins_master" {
   username            = var.username
   is_master           = true
   master_ip           = azurerm_public_ip.jenkins_master.ip_address
-  secret              = var.secret   # Pass the secret variable here
+  secret              = var.secret   # Pass the secret here
   password            = var.password
-  ssh_public_key_path = "~/.ssh/id_rsa.pub"
 }
+
 
 output "master_ip" {
   value = module.jenkins_master.vm_ip
