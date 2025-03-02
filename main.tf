@@ -9,16 +9,17 @@ module "jenkins_master" {
   is_master           = true
 }
 
-module "jenkins_slave" {
+module "jenkins_master" {
   source              = "./modules/jenkins_vm"
-  vm_name             = "jenkins-slave"
+  vm_name             = "jenkins-master"
+  location           = var.location
   resource_group_name = var.resource_group_name
-  location            = var.location
   vm_size             = var.vm_size
   username            = var.username
-  password            = var.password
-  is_master           = false
-  master_ip           = module.jenkins_master.vm_ip
+  is_master           = true
+  master_ip           = azurerm_public_ip.jenkins_master.ip_address
+  secret              = var.secret   # Pass the secret variable here
+  ssh_public_key_path = "~/.ssh/id_rsa.pub"
 }
 
 output "master_ip" {

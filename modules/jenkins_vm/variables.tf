@@ -11,7 +11,7 @@ variable "resource_group_name" {
 variable "secret" {
   description = "The secret for the Jenkins agent to connect to the master."
   type        = string
-  sensitive   = true  # Marking this variable as sensitive to avoid logging in plan/apply
+  sensitive   = true
 }
 
 variable "location" {
