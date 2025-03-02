@@ -39,6 +39,11 @@ variable "is_master" {
   type        = bool
 }
 
+variable "ssh_public_key_path" {
+  description = "The path to the SSH public key for VM login."
+  type        = string
+}
+
 variable "master_ip" {
   description = "The public IP address of the Jenkins master (required for slaves)."
   type        = string

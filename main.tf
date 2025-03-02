@@ -7,8 +7,9 @@ module "jenkins_master" {
   username            = var.username
   is_master           = true
   master_ip           = azurerm_public_ip.jenkins_master.ip_address
-  secret              = var.secret   # Pass the secret here
+  secret              = var.secret
   password            = var.password
+  ssh_public_key_path = "~/.ssh/id_rsa.pub"  # Now you pass it correctly
 }
 
 
