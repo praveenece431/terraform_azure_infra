@@ -120,10 +120,8 @@ resource "null_resource" "provision_jenkins" {
     "tar -xvf apache-tomcat-9.0.100.tar.gz",
     "mv apache-tomcat-9.0.100 tomcat",
     "echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> ~/.bashrc",
-    "source ~/.bashrc",
     "sudo mv jenkins.war tomcat/webapps/",
-    "sudo ./tomcat/bin/startup.sh",
-    "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
+    "sudo ./tomcat/bin/startup.sh"
   ]
 
   connection {
