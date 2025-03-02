@@ -3,8 +3,8 @@ resource "null_resource" "jenkins_master" {
     connection {
       type        = "ssh"
       user        = "azureuser"
-      private_key = tls_private_key.ssh_key.private_key_pem # ✅ Use dynamically generated private key
-      host        = azurerm_linux_virtual_machine.vm[0].public_ip_address
+      private_key = var.ssh_private_key # ✅ Use input variable from compute module
+      host        = var.vm_public_ips[0] # ✅ Use input variable from compute module
     }
 
     inline = [
@@ -25,8 +25,8 @@ resource "null_resource" "jenkins_slave" {
     connection {
       type        = "ssh"
       user        = "azureuser"
-      private_key = tls_private_key.ssh_key.private_key_pem # ✅ Use dynamically generated private key
-      host        = azurerm_linux_virtual_machine.vm[1].public_ip_address
+      private_key = var.ssh_private_key # ✅ Use input variable from compute module
+      host        = var.vm_public_ips[1] # ✅ Use input variable from compute module
     }
 
     inline = [
@@ -34,7 +34,7 @@ resource "null_resource" "jenkins_slave" {
       "sudo apt install -y openjdk-11-jdk",
       "sudo useradd -m -s /bin/bash jenkins-slave",
       "sudo mkdir -p /home/jenkins-slave/.ssh",
-      "sudo echo '${tls_private_key.ssh_key.public_key_openssh}' > /home/jenkins-slave/.ssh/authorized_keys",
+      "echo '${var.ssh_public_key}' | sudo tee /home/jenkins-slave/.ssh/authorized_keys",
       "sudo chown -R jenkins-slave:jenkins-slave /home/jenkins-slave/.ssh",
       "sudo chmod 600 /home/jenkins-slave/.ssh/authorized_keys"
     ]

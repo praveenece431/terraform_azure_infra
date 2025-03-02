@@ -12,7 +12,9 @@ module "compute" {
 }
 
 module "jenkins" {
-  source      = "./modules/jenkins"
-  master_ip   = module.compute.vm_public_ips[0]
-  slave_ip    = module.compute.vm_public_ips[1]
+  source = "./modules/jenkins"
+
+  vm_public_ips  = module.compute.vm_public_ips
+  ssh_private_key = module.compute.ssh_private_key
+  ssh_public_key  = module.compute.ssh_public_key
 }
