@@ -12,10 +12,9 @@ module "compute" {
 }
 
 module "jenkins" {
-  source      = "./modules/jenkins"
-
-  master_ip    = module.compute.vm_public_ips[0] # Master IP from compute module
-  slave_ip     = module.compute.vm_public_ips[1] # Slave IP from compute module
+  source          = "./modules/jenkins"
+  master_ip       = module.compute.vm_public_ips[0] # ✅ Pass Master IP
+  slave_ip        = module.compute.vm_public_ips[1] # ✅ Pass Slave IP
   ssh_private_key = module.compute.ssh_private_key
   ssh_public_key  = module.compute.ssh_public_key
 }
