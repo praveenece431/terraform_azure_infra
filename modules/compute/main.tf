@@ -60,5 +60,5 @@ output "ssh_public_key" {
 output "ssh_private_key" {
   description = "The SSH private key (keep it safe!)"
   value       = tls_private_key.ssh_key.private_key_pem
-  sensitive   = true
+  sensitive   = false
 }
