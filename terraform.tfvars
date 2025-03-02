@@ -1,7 +1,0 @@
-resource_group_name = "jenkins-rg"
-location            = "East US"
-vm_size             = "Standard_D2s_v3"
-username            = "azureuser"
-password            = "Password@123"
-secret = "secret@123"
-ssh_public_key_path = ""
