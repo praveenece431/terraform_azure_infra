@@ -48,12 +48,12 @@ resource "azurerm_virtual_machine" "example" {
     managed              = true
 
     # Image reference inside storage_os_disk
-    image_reference {
+    source_image_reference {
       publisher = "Canonical"
       offer     = "UbuntuServer"
-      sku       = "20.04-LTS"
-      version   = "latest"
-    }
+      sku       = "18.04-DAILY-LTS"
+      version   = "18.04.202306070"
+  }
   }
 
   # Provisioning the machine
