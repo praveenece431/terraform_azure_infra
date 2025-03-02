@@ -36,3 +36,9 @@ variable "master_ip" {
   type        = string
   default     = ""
 }
+
+variable "secret" {
+  description = "The secret for the Jenkins agent to connect to the master."
+  type        = string
+  sensitive   = true
+}
