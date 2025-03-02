@@ -1,20 +1,34 @@
-module "network" {
-  source               = "./modules/network"
-  resource_group_name  = "terraform-rg"
-  location             = "East US"
+provider "azurerm" {
+  features {}
 }
 
-module "compute" {
-  source               = "./modules/compute"
-  resource_group_name  = module.network.resource_group_name
-  location             = module.network.location
-  subnet_id            = module.network.subnet_id
+module "jenkins_master" {
+  source              = "./modules/jenkins_vm"
+  vm_name             = "jenkins-master"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  vm_size             = var.vm_size
+  username            = var.username
+  password            = var.password
+  is_master           = true
 }
 
-module "jenkins" {
-  source          = "./modules/jenkins"
-  master_ip       = module.compute.vm_public_ips[0] # ✅ Pass Master IP
-  slave_ip        = module.compute.vm_public_ips[1] # ✅ Pass Slave IP
-  ssh_private_key = module.compute.ssh_private_key
-  ssh_public_key  = module.compute.ssh_public_key
+module "jenkins_slave" {
+  source              = "./modules/jenkins_vm"
+  vm_name             = "jenkins-slave"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  vm_size             = var.vm_size
+  username            = var.username
+  password            = var.password
+  is_master           = false
+  master_ip           = module.jenkins_master.vm_ip
+}
+
+output "master_ip" {
+  value = module.jenkins_master.vm_ip
+}
+
+output "slave_ip" {
+  value = module.jenkins_slave.vm_ip
 }

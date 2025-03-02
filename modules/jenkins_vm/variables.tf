@@ -1,3 +1,8 @@
+variable "vm_name" {
+  description = "The name of the VM."
+  type        = string
+}
+
 variable "resource_group_name" {
   description = "The name of the resource group."
   type        = string
@@ -6,33 +11,30 @@ variable "resource_group_name" {
 variable "location" {
   description = "Azure location where resources will be deployed."
   type        = string
-  default     = "East US"
 }
 
 variable "vm_size" {
   description = "Size of the Azure Virtual Machine."
   type        = string
-  default     = "Standard_D2s_v3"
 }
 
 variable "username" {
-  description = "Admin username for the Azure VM."
+  description = "Admin username for the VM."
   type        = string
 }
 
 variable "password" {
-  description = "Admin password for the Azure VM."
+  description = "Admin password for the VM."
   type        = string
 }
 
-variable "jenkins_master_ip" {
-  description = "The public IP of the Jenkins master VM."
-  type        = string
-  default     = ""
+variable "is_master" {
+  description = "Indicates if this VM is a Jenkins master."
+  type        = bool
 }
 
 variable "master_ip" {
-  description = "Master VM IP address for connecting Jenkins slave."
+  description = "The public IP address of the Jenkins master (required for slaves)."
   type        = string
   default     = ""
 }

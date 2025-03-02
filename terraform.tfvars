@@ -1,2 +1,5 @@
-resource_group_name = "terraform-rg"
-location           = "East US"
+resource_group_name = "jenkins-rg"
+location            = "East US"
+vm_size             = "Standard_D2s_v3"
+username            = "azureuser"
+password            = "Password@123"
