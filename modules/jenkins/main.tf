@@ -20,7 +20,7 @@ resource "null_resource" "jenkins_master" {
       "sudo systemctl start jenkins",
       "sudo systemctl enable jenkins",
       "sudo systemctl status jenkins"
-]
+    ]
   }
 }
 
