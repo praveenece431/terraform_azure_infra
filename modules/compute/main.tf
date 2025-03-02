@@ -37,7 +37,3 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 }
-
-output "vm_public_ips" {
-  value = azurerm_linux_virtual_machine.vm[*].public_ip_address
-}
