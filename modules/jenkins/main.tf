@@ -35,10 +35,10 @@ resource "null_resource" "jenkins_slave" {
     inline = [
       "sudo apt update -y",
       "sudo apt install -y openjdk-11-jdk",
-      "sudo useradd -m -s /bin/bash jenkins-slave",
-      "sudo mkdir -p /home/jenkins-slave/.ssh",
-      "sudo chown -R jenkins-slave:jenkins-slave /home/jenkins-slave/.ssh",
-      "echo '${var.ssh_public_key}' | sudo tee /home/jenkins-slave/.ssh/authorized_keys"
+      "#sudo useradd -m -s /bin/bash jenkins-slave",
+      "#sudo mkdir -p /home/jenkins-slave/.ssh",
+      "#sudo chown -R jenkins-slave:jenkins-slave /home/jenkins-slave/.ssh",
+      "#echo '${var.ssh_public_key}' | sudo tee /home/jenkins-slave/.ssh/authorized_keys"
     ]
   }
 }
